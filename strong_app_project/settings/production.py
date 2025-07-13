@@ -36,5 +36,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles_prod')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://strong-backend-5caa.onrender.com", # Your backend's own URL
-    "https://your-vercel-frontend-url.vercel.app", # <--- ADD THIS LINE with your actual Vercel URL
+    "https://strong-frontend.vercel.app", # <--- ADD THIS LINE with your actual Vercel URL
 ]
