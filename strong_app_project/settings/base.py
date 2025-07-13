@@ -156,8 +156,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # محل ذخیره فایل‌ها
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication', # برای راحتی تست در مرورگر
-        'rest_framework.authentication.BasicAuthentication', # برای راحتی تست در مرورگر
+       # 'rest_framework.authentication.SessionAuthentication', # برای راحتی تست در مرورگر
+       # 'rest_framework.authentication.BasicAuthentication', # برای راحتی تست در مرورگر
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated', # پیش‌فرض: نیاز به احراز هویت برای اکثر APIها
