@@ -34,7 +34,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles_prod')
 # CORS Headers settings for production
 # This list should include the exact URL(s) of your deployed React frontend
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:8000",
     "https://strong-backend-5caa.onrender.com", # Your backend's own URL
     "https://strong-frontend.vercel.app", # <--- ADD THIS LINE with your actual Vercel URL
 ]
