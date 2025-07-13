@@ -1,51 +1,41 @@
-#!/usr/bin/env bash
-# Exit on error
-set -o errexit
-# Print commands and their arguments as they are executed
-set -x
+    #!/usr/bin/env bash
+    set -o errexit # Exit on error
+    set -x         # Print commands for debugging
 
-# Define the path to your Django project's requirements.txt
-DJANGO_PROJECT_DIR="strong_app_project"
-REQUIREMENTS_FILE="$DJANGO_PROJECT_DIR/requirements.txt"
+    echo "--- Starting Django Backend Build Process ---"
 
-echo "--- Starting Build Process ---"
+    echo "Current working directory on Render: $(pwd)"
+    echo "Listing contents of the current directory (should be my-backend/):"
+    ls -la .
 
-echo "Current working directory: $(pwd)"
-echo "Listing contents of the root directory:"
-ls -la .
+    echo "Python version:"
+    python --version
 
-echo "Listing contents of the Django project directory: $DJANGO_PROJECT_DIR"
-ls -la "$DJANGO_PROJECT_DIR"
+    echo "Pip version:"
+    python -m pip --version
 
-echo "Checking if requirements.txt exists at $REQUIREMENTS_FILE..."
-if [ ! -f "$REQUIREMENTS_FILE" ]; then
-    echo "ERROR: requirements.txt not found at $REQUIREMENTS_FILE. Please ensure it exists."
-    exit 1
-fi
+    echo "Upgrading pip..."
+    python -m pip install --upgrade pip
 
-echo "Python version:"
-python --version
+    echo "Installing Python dependencies from requirements.txt..."
+    # requirements.txt is directly in the root of this repo (my-backend/)
+    if [ ! -f "requirements.txt" ]; then
+        echo "ERROR: requirements.txt not found in the root of my-backend folder. Please ensure it exists."
+        exit 1
+    fi
+    python -m pip install -r requirements.txt
 
-echo "Pip version:"
-python -m pip --version
+    echo "Verifying installed packages after installation:"
+    python -m pip freeze
 
-echo "Upgrading pip..."
-python -m pip install --upgrade pip
+    echo "--- Dependencies Installed. Proceeding with Django commands ---"
 
-echo "Installing Python dependencies from $REQUIREMENTS_FILE..."
-python -m pip install -r "$REQUIREMENTS_FILE"
+    echo "Running Django migrations..."
+    # manage.py is directly in the root of this repo (my-backend/)
+    python manage.py migrate
 
-echo "Verifying installed packages after installation:"
-python -m pip freeze
+    echo "Collecting static files..."
+    python manage.py collectstatic --no-input
 
-echo "--- Dependencies Installed. Proceeding with Django commands ---"
-
-echo "Running Django migrations..."
-# The manage.py script is at the root of the project (src on Render)
-# We need to explicitly call it with the correct Python interpreter
-python manage.py migrate
-
-echo "Collecting static files..."
-python manage.py collectstatic --no-input
-
-echo "--- Build Process Complete ---"
+    echo "--- Django Backend Build Process Complete ---"
+    
