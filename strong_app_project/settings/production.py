@@ -37,4 +37,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "https://strong-backend-5caa.onrender.com", # Your backend's own URL
     "https://strong-frontend.vercel.app", # <--- ADD THIS LINE with your actual Vercel URL
+    "https://strong-frontend-git-main-navids-projects-8d20eb27.vercel.app",
+    "https://strong-frontend-abwjmlvbp-navids-projects-8d20eb27.vercel.app",
 ]
